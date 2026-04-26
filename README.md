@@ -22,7 +22,9 @@ L'architecture repose désormais sur l'orchestration de plusieurs services souve
 ## 🏗️ Architecture des Agents IA
 Voici le schéma global de fonctionnement de l'infrastructure :
 
-<img src="documentation/architecture_agents_AI.png" alt="Architecture des Agents IA" width="50%"/>
+<p align="center">
+  <img src="documentation/architecture_agents_AI.png" alt="Architecture des Agents IA" width="50%"/>
+</p>
 
 > **Visualisation :** Le schéma ci-dessus montre comment **Dify** sert de cerveau d'orchestration pour créer des agents spécialisés (Veille Tech, Expert ISO). Ces agents utilisent **Ollama** comme moteur de réflexion et accèdent au **RAG** (via ChromaDB) ou au Web via le protocole **MCP**.
 
