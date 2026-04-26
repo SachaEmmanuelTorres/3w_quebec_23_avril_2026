@@ -48,12 +48,6 @@ graph TD
 - **Ollama, Llama.cpp, Hermes RAG, OpenCode, OpenRouter** : Tous sont configurés avec un montage de volume sur le dossier des modèles de l'hôte.
 - **Open WebUI** : Sert de point d'entrée unique pour l'interaction utilisateur.
 
-## 🏛️ Architecture des Agents IA
-Visualisation de la logique des agents :
-
-<p align="center">
-  <img src="documentation/architecture_agents_AI.png" alt="Architecture des Agents IA" width="50%"/>
-</p>
 
 ## 🚀 Lancement Rapide
 ```bash
