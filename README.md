@@ -30,10 +30,9 @@ Ce schéma illustre l'interaction entre les services pour la création d'agents 
 > **Visualisation :** Le schéma ci-dessus montre comment **Dify** sert de cerveau d'orchestration pour créer des agents spécialisés (Veille Tech, Expert ISO). Ces agents utilisent **Ollama** comme moteur de réflexion et accèdent au **RAG** (via ChromaDB) ou au Web via le protocole **MCP**.
 
 ## 📂 Structure du Dépôt
-- `docker-compose.yaml` : Fichier de configuration pour lancer l'ensemble de la stack avec Podman.
-- `volumes/` : Répertoires pour la persistance des modèles Ollama et des bases de données.
+- `compose.yaml` : Fichier de configuration pour lancer l'ensemble de la stack avec Podman.
+- `documentation/` : Contient les images et les documents de support.
 - `pre-requis.md` : Guide d'installation de Podman et configuration système.
-- `presentation_3w_quebec.pptx` : Support visuel de la présentation.
 
 ## 🚀 Installation Rapide
 1. Clonez le dépôt : `git clone https://github.com/SachaEmmanuelTorres/3w_quebec_2026.git`
@@ -43,12 +42,10 @@ Ce schéma illustre l'interaction entre les services pour la création d'agents 
    ```
 3. Accédez aux services :
    - **Interface Chat & RAG :** `http://localhost:3000` (Open WebUI)
-   - **Création d'Agents IA :** `http://localhost:80` (Dify)
+   - **Visualisation des conteneurs :** `http://localhost:9090` (Cockpit)
+
+## 🏛️ Architecture des Agents IA
+![Architecture des Agents IA](documentation/architecture_agents_AI.png)
 
 ---
 *Projet réalisé dans le cadre de la conférence 3W Québec à l'UQAM.*
-
-
-## Architecture des Agents IA
-
-![Architecture des Agents IA](documentation/architecture_agents_AI.png)
