@@ -1,0 +1,59 @@
+services:
+  hermes-rag:
+    build: ./hermes-rag
+    container_name: hermes-rag
+    volumes:
+      - /media/sacha/datas/models:/app/models:ro
+    networks:
+      - ai-net
+    ports:
+      - "5000:5000"
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    volumes:
+      - /media/sacha/datas/models:/root/.ollama/models:ro
+    networks:
+      - ai-net
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    depends_on: [ollama, hermes-rag]
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    networks:
+      - ai-net
+
+  opencode-gui:
+    build: ./opencode-gui
+    container_name: opencode-gui
+    ports:
+      - "6080:6080"
+    networks:
+      - ai-net
+
+  llamacpp:
+    build: ./llamacpp-gui
+    container_name: llamacpp
+    volumes:
+      - /media/sacha/datas/models:/models:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - ai-net
+
+  openrouter-proxy:
+    build: ./openrouter-proxy
+    container_name: openrouter-proxy
+    ports:
+      - "4000:4000"
+    networks:
+      - ai-net
+
+networks:
+  ai-net:
+    driver: bridge
