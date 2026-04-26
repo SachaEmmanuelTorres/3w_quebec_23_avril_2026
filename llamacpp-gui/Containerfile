@@ -4,5 +4,5 @@ RUN git clone https://github.com/ggerganov/llama.cpp /app
 WORKDIR /app
 RUN cmake -B build && cmake --build build --config Release
 EXPOSE 8090
-# Lancement sur le port 8090
-CMD ["./build/bin/llama-server", "--host", "0.0.0.0", "--port", "8090", "--model", "/models/granite-2b-test.gguf"]
+# Lancement par défaut, peut être surchargé par le compose.yaml
+ENTRYPOINT ["./build/bin/llama-server", "--host", "0.0.0.0", "--port", "8090", "--model", "/models/davelsphere_granite-3.0-2b-base-Q4_K_M.gguf"]
