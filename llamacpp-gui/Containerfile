@@ -1,8 +1,8 @@
-FROM fedora:40
-RUN dnf install -y git make gcc-c++ cmake python3-pip && dnf clean all
+FROM fedora-minimal:43
+RUN microdnf install -y git make gcc-c++ cmake python3-pip tar gzip && microdnf clean all
 RUN git clone https://github.com/ggerganov/llama.cpp /app
 WORKDIR /app
 RUN cmake -B build && cmake --build build --config Release
-EXPOSE 8080
-# Lancement du serveur natif llama.cpp
-CMD ["./build/bin/llama-server", "--host", "0.0.0.0", "--port", "8080", "--model", "/models/granite-2b-test.gguf"]
+EXPOSE 8090
+# Lancement sur le port 8090
+CMD ["./build/bin/llama-server", "--host", "0.0.0.0", "--port", "8090", "--model", "/models/granite-2b-test.gguf"]

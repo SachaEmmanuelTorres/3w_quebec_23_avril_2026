@@ -42,7 +42,7 @@ services:
     volumes:
       - /media/sacha/datas/models:/models:ro
     ports:
-      - "8080:8080"
+      - "8090:8090"
     networks:
       - ai-net
 
