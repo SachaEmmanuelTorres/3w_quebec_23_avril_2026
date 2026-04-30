@@ -2,7 +2,7 @@
 .env/
 __pycache__/
 *.py[cod]
-*$py.class
+*.class
 venv/
 ENV/
 
@@ -23,6 +23,7 @@ presentation_final_v2.md
 .DS_Store
 .idea/
 .vscode/
-script-interaction-model/token_langchain.md
-.gitignore
+
+# Secrets
 script-interaction-model/token_hugging.md
+script-interaction-model/token_langchain.md

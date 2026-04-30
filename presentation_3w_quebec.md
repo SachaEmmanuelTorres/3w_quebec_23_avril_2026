@@ -1,56 +1,62 @@
-### IA en local : Optimisation et Orchestration
+# IA Locale, Open Source et Agents RAG
+### Bâtir une infrastructure souveraine avec Podman
 
+---
+
+### Le choix de l'écosystème
 **Le choix du LLM :**
 ⇒ Hugging Face : [https://huggingface.co/](https://huggingface.co/)
 
 Approche structurée :
-- **Modèles optimisés pour le code :** Granite 3.0 3B (Instruct) et Qwen 2.5 3B (Instruct, version Q6_K).
-- **Format :** Utilisation systématique du format GGUF pour la compatibilité native.
+- **Modèles optimisés pour le code :** Granite 3.0 3B (Instruct) et Qwen 2.5 3B (Instruct).
+- **Format :** Utilisation systématique du format GGUF.
 
-**Le choix des outils de gestion et d'interface :**
-
-*   **Llama.cpp :** Serveur backend haute performance pour les modèles GGUF.
-*   **Ollama :** Gestionnaire de modèles local optimisé, intégré avec Open-WebUI.
-*   **OpenCode-GUI :** Environnement de développement complet conteneurisé.
-*   **OpenRouter-Proxy (LiteLLM) :** Hub central pour l'orchestration des modèles.
+**Le choix des outils :**
+*   **Llama.cpp :** Serveur backend haute performance.
+*   **Ollama :** Gestionnaire de modèles local simplifié.
+*   **OpenCode-GUI :** Environnement de développement conteneurisé.
+*   **OpenRouter-Proxy :** Hub central pour l'orchestration.
 
 ---
 
-### Agents :
+### 🏗️ Architecture : La Force du Volume Partagé
+
+- **Un seul dossier `/models`** pour tous les services.
+- **Interopérabilité** : Ollama (modèles simples) + Llama.cpp (GGUF avancés).
+- **Persistance** : Logs, Données et Entraînement isolés.
+
+---
+
+### Agents & RAG :
 
 *   **RAG (Retrieval Augmented Generation) :** Système basé sur Marimo pour interroger dynamiquement vos connaissances locales.
-*   **Interfaces graphiques :** Open-WebUI (Port 3000) et Chatbot UI (Port 3001).
+*   **Interfaces graphiques :** Open-WebUI (Port 3000).
 
 ---
 
-### MCP (Model Context Protocol) - Partie 1
+### 🛠️ Automatisation et Interaction
 
-**Définition :**
-Le MCP est un protocole standardisé permettant d'exposer des capacités, des outils et des données aux modèles d'IA de manière structurée et sécurisée.
+- **`add_model.sh`** : Un pont interactif entre Hugging Face et votre stack locale.
+- **Écosystème Python (uv)** :
+  - Scripts d'interaction rapides.
+  - Intégration LangChain & Pydantic-AI.
 
-**Exemple de code (outil MCP - Partie 1) :**
+---
 
+### MCP (Model Context Protocol)
+
+**Définition :** Standard pour exposer des outils et données aux modèles de manière sécurisée.
+
+**Exemple d'outil MCP :**
 ```python
 def check_disk_usage():
     import shutil
     total, used, free = shutil.disk_usage("/")
-    return {
-        "total": total,
-        "used": used,
-        "free": free
-    }
+    return {"total": total, "used": used, "free": free}
 
 from mcp.server import Server
 from mcp.types import Tool, Schema
-```
 
----
-
-### MCP (Model Context Protocol) - Partie 2
-
-**Exemple de code (outil MCP - Partie 2) :**
-
-```python
 server = Server()
 @server.tool(
     Tool(
@@ -72,3 +78,20 @@ def check_disk_tool(_args):
 
 server.run()
 ```
+
+---
+
+### 🚀 Démo : Du modèle à l'interaction
+
+1. **Démarrage** : `podman-compose up -d`
+2. **Installation** : `./add_model.sh`
+3. **Inférence** : `uv run test_ai.py`
+
+---
+
+### 🌐 Conclusion
+- **Souveraineté Totale** : 100% Hors-ligne si nécessaire.
+- **Contrôle des coûts** : Pas de facturation au token.
+
+**Merci de votre attention !**
+*Accès stack : http://localhost:8080*

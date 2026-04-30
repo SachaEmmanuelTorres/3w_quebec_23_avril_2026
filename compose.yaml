@@ -31,8 +31,31 @@ services:
   opencode-gui:
     build: ./opencode-gui
     container_name: opencode-gui
+    volumes:
+      - /media/sacha/de202ea4-0195-4fcc-85f1-3ca679ce2cdf1/models:/root/models:rw
+      - ./logs:/root/logs:Z
+      - ./data_io:/root/data:Z
+      - ./training:/root/training:Z
     ports:
       - "6080:6080"
+    networks:
+      - ai-net
+
+  openrouter-proxy:
+    build: ./openrouter-proxy
+    container_name: openrouter-proxy
+    ports:
+      - "4000:4000"
+    networks:
+      - ai-net
+
+  homepage:
+    image: nginx:alpine
+    container_name: ia-homepage
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+    ports:
+      - "8080:80"
     networks:
       - ai-net
 
@@ -40,11 +63,15 @@ services:
     build: ./llamacpp-gui
     container_name: llamacpp
     volumes:
-      - /media/sacha/de202ea4-0195-4fcc-85f1-3ca679ce2cdf1/models:/models:ro
+      - /media/sacha/de202ea4-0195-4fcc-85f1-3ca679ce2cdf1/models:/models:rw
+      - ./logs:/var/log/llama-cpp:Z
+      - ./data_io:/mnt/data:Z
+      - ./training:/training_data:Z
     ports:
       - "8090:8090"
     networks:
       - ai-net
+    command: ["--model", "/models/qwen2.5-3b-instruct.gguf", "--host", "0.0.0.0", "--port", "8090"]
 
 networks:
   ai-net:
