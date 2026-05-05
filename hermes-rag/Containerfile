@@ -4,7 +4,9 @@ RUN apt-get update && apt-get install -y     build-essential     curl     && rm 
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir     marimo     langchain     chromadb     sentence-transformers     flask
+COPY app.py .
+
+RUN pip install --no-cache-dir     marimo     langchain     langchain-community     chromadb     sentence-transformers     flask
 
 RUN mkdir -p /app/knowledge /app/models
 

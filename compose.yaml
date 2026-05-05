@@ -1,6 +1,8 @@
 services:
   hermes-rag:
-    build: ./hermes-rag
+    build:
+      context: ./hermes-rag
+      dockerfile: Containerfile
     container_name: hermes-rag
     volumes:
       - /media/sacha/de202ea4-0195-4fcc-85f1-3ca679ce2cdf1/models:/app/models:rw
@@ -53,14 +55,16 @@ services:
     image: nginx:alpine
     container_name: ia-homepage
     volumes:
-      - ./index.html:/usr/share/nginx/html/index.html:ro
+      - ./index.html:/usr/share/nginx/html/index.html:ro,Z
     ports:
       - "8080:80"
     networks:
       - ai-net
 
   llamacpp:
-    build: ./llamacpp-gui
+    build:
+      context: ./llamacpp-gui
+      dockerfile: Containerfile
     container_name: llamacpp
     volumes:
       - /media/sacha/de202ea4-0195-4fcc-85f1-3ca679ce2cdf1/models:/models:rw
