@@ -31,7 +31,9 @@ services:
       - ai-net
 
   opencode-gui:
-    build: ./opencode-gui
+    build:
+      context: ./opencode-gui
+      dockerfile: Containerfile
     container_name: opencode-gui
     volumes:
       - /media/sacha/de202ea4-0195-4fcc-85f1-3ca679ce2cdf1/models:/root/models:rw
@@ -44,7 +46,9 @@ services:
       - ai-net
 
   openrouter-proxy:
-    build: ./openrouter-proxy
+    build:
+      context: ./openrouter-proxy
+      dockerfile: Containerfile
     container_name: openrouter-proxy
     ports:
       - "4000:4000"
