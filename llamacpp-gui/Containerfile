@@ -1,4 +1,4 @@
-FROM fedora-minimal:43
+FROM registry.fedoraproject.org/fedora-minimal:43
 RUN microdnf install -y git make gcc-c++ cmake python3-pip tar gzip && microdnf clean all
 RUN git clone https://github.com/ggerganov/llama.cpp /app
 WORKDIR /app
